@@ -1,0 +1,92 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ performance.title }}</title>
+    <link rel="stylesheet" href="{% static 'booking/style.css' %}">
+    
+</head>
+<body class="detail-page">
+    <div class="header-placeholder"></div>
+
+    <section class="hero" style="background-image: url('{{ performance.poster.url }}');">
+        <div class="hero-overlay">
+            <div class="hero-content">
+                <img src="{{ performance.poster.url }}" alt="{{ performance.title }}" class="hero-poster">
+                <h1 class="hero-title">{{ performance.title }}</h1>
+            </div>
+        </div>
+    </section>
+
+    <section class="details-block">
+        <div class="sessions">
+            {% for session in sessions %}
+                <button class="session-button">
+                    {{ session.date }} — {{ session.time }}
+                </button>
+            {% empty %}
+                <p>Немає доступних сеансів</p>
+            {% endfor %}
+        </div>
+
+        <div class="description collapsed">
+            <div class="description-content">
+                <h2>Про виставу</h2>
+                <p>{{ performance.description }}</p>
+                <button class="show-more-btn" onclick="toggleDescription(this)">Показати більше</button>
+                <p><strong>Трупа:</strong> {{ performance.troupe }}</p>
+            </div>
+            
+        </div>
+        
+    </section>
+
+    <section class="gallery-block">
+        <h2>Фотографії</h2>
+        {% if performance.images.all %}
+            <div class="carousel">
+                {% for image in performance.images.all %}
+                    <img src="{{ image.image.url }}" alt="Фото з вистави">
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>Немає доступних фото</p>
+        {% endif %}
+    </section>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.2 });
+
+        document.querySelectorAll('.details-block, .gallery-block').forEach(section => {
+            observer.observe(section);
+        });
+
+        const carousel = document.querySelector('.carousel');
+        if (carousel) {
+            carousel.addEventListener('wheel', (e) => {
+                e.preventDefault();
+                carousel.scrollLeft += e.deltaY;
+            });
+        }
+
+        function toggleDescription(button) {
+            const description = button.closest('.description');
+            description.classList.toggle('collapsed');
+            if (description.classList.contains('collapsed')) {
+                button.textContent = 'Показати більше';
+            } else {
+                button.textContent = 'Приховати';
+            }
+        }
+    </script>
+</body>
+</html>

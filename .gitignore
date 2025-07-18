@@ -1,0 +1,6 @@
+hotel_venv
+__pycache__/
+*.pyc
+.env
+script_generate_seats.py
+*.sqlite3

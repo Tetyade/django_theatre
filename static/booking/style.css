@@ -1,0 +1,270 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #e4c2c2;
+  background-image: url("curtains_left.png"), url("curtains_right.png");
+  background-repeat: no-repeat, no-repeat;
+  background-position: left top, right top;
+  background-size: auto clamp(500px, 100vh, 1000px);
+
+}
+
+
+@media (max-width: 768px) {
+  .curtain {
+    display: none;
+  }
+}
+
+@media (min-width: 769px) {
+  .curtain {
+    width: clamp(100px, 12vw, 220px); 
+  }
+}
+
+.content-wrapper {
+  max-width: 1000px;
+  margin: 100px auto;
+  /* margin-top: 120px; */
+  padding: 2rem;
+  background-color: rgba(255, 255, 255, 0.3); /* напівпрозорий білий */
+  border-radius: 16px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.1);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2rem;
+  z-index: 2;
+  position: relative;
+}
+
+.performance-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.poster-wrapper {
+  width: 100%;
+  aspect-ratio: 2 / 3; /* 600x900 = 2:3 */
+  overflow: hidden;
+  border-radius: 12px;
+  background-color: transparent;
+}
+
+.poster {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.title a {
+  margin-top: 1rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #000;
+  transition: color 0.3s ease;
+  text-decoration: none;
+}
+
+.performance-card:hover .title,
+.performance-card:hover .title a {
+  color: #7a1123; /* темно-бордовий */
+  text-decoration: none;
+}
+
+.performance-card:hover .poster {
+  transform: scale(1.02);
+}
+
+
+/* ПАГІНАТОР */
+.pagination {
+  text-align: center;
+  padding: 2rem;
+  font-size: 1.2rem;
+  color: #66171e; 
+}
+.pagination a {
+  text-decoration: none;
+  color: #66171e;
+  font-weight: bold;
+  margin: 0 10px;
+}
+
+body.detail-page {
+  background: none !important;
+}
+
+/* Hero section з розмитим фоном */
+.hero {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  min-height: 500px;
+  overflow: hidden;
+}
+
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  backdrop-filter: blur(12px);
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem;
+}
+  /* position: absolute;
+  inset: 0;
+  backdrop-filter: blur(12px);
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem;
+} */
+
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  align-items: center;
+  max-width: 1100px;
+  margin: 0 auto;
+  color: white;
+}
+.hero-poster {
+  width: 300px;
+  max-width: 100%;
+  border-radius: 12px;
+  object-fit: contain;
+}
+
+.hero-title {
+  font-size: 3rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  flex: 1;
+}
+
+/* Білий блок (тільки верхні кути заокруглені) */
+.details-block {
+  position: relative;
+  background: white;
+  border-radius: 32px 32px 0 0;
+  box-shadow: 0 -12px 30px rgba(0, 0, 0, 0.3);
+  padding: 3rem clamp(1rem, 5vw, 4rem);
+  margin-top: -25px; /* ключовий момент! */
+  z-index: 3;
+}
+
+/* Кнопки сесій */
+.session-button {
+  background-color: transparent;
+  color: #7a1123;
+  border: 2px solid #7a1123;
+  padding: 0.6rem 1.2rem;
+  margin: 0.5rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.session-button:hover {
+  background-color: #7a1123;
+  color: white;
+}
+
+/* Галерея */
+.gallery-block {
+  background: #7a1123;
+  color: white;
+  padding: 3rem 2rem;
+  text-align: center;
+}
+
+.carousel {
+  display: flex;
+  overflow-x: auto;
+  gap: 1rem;
+  padding-bottom: 1rem;
+}
+
+.carousel img {
+  height: 200px;
+  border-radius: 12px;
+  flex-shrink: 0;
+  object-fit: cover;
+}
+
+/* Анімація для секцій */
+.details-block,
+.gallery-block {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.6s ease;
+}
+
+.details-block.visible,
+.gallery-block.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.description.collapsed p {
+    max-height: 6em;
+    overflow: hidden;
+    position: relative;
+}
+
+.description.collapsed::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3em;
+    background: linear-gradient(to bottom, rgba(255,255,255,0), white);
+}
+
+.show-more-btn {
+    display: inline-block;
+    margin-top: 1rem;
+    background: none;
+    border: 2px solid #7a1123;
+    color: #7a1123;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.show-more-btn:hover {
+    background-color: #7a1123;
+    color: white;
+}
+
+.description-content {
+    padding-left: 120px;
+    padding-right: 120px;
+}
+
+@media (max-width: 768px) {
+    .description-content {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+}

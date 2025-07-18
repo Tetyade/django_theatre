@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вистави</title>
+    <link rel="stylesheet" href="{% static 'booking/style.css' %}">
+</head>
+<body>
+  <div class="curtain left"></div>
+  <div class="curtain right"></div>
+
+  <div class="content-wrapper">
+    {% for perf in page_obj %}
+      <div class="performance-card">
+        <div class="poster-wrapper">
+         <img class="poster" src="{{ perf.poster.url }}" alt="{{ perf.title }}">
+        </div>
+        <h2 class="title">
+          <a href="{% url 'performance_detail' perf.id %}">{{ perf.title }}</a>
+        </h2>
+      </div>
+    {% endfor %}
+  </div>
+
+
+  <div class="pagination">
+    {% if page_obj.has_previous %}
+      <a href="?page={{ page_obj.previous_page_number }}">← Назад</a>
+    {% endif %}
+    <span>Сторінка {{ page_obj.number }} з {{ page_obj.paginator.num_pages }}</span>
+    {% if page_obj.has_next %}
+      <a href="?page={{ page_obj.next_page_number }}">Далі →</a>
+    {% endif %}
+  </div>
+
+  <script src="{% static 'booking/animation.js' %}"></script>
+</body>
+
+</html>
