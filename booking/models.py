@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from decimal import Decimal
 
 class Performance(models.Model):
     title = models.CharField(max_length=255)
@@ -53,6 +54,11 @@ class Session(models.Model):
 
     def __str__(self):
         return f"{self.performance.title} — {self.date} {self.time}"
+    
+    
+    def get_price_for_seat(self, seat):
+        discount = seat.category.discount_percent if seat.category else Decimal('0')
+        return self.base_price * (Decimal('1') - discount / Decimal('100'))
 
 class Booking(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -64,9 +70,9 @@ class Booking(models.Model):
     class Meta:
         unique_together = ('session', 'seat')  # не можна забронювати одне місце двічі!!
 
-    def get_price_for_seat(self, seat):
-        discount = seat.category.discount_percent if seat.category else 0
-        return float(self.base_price) * (1 - discount / 100)
+    # def get_price_for_seat(self, seat):
+    #     discount = seat.category.discount_percent if seat.category else 0
+    #     return float(self.base_price) * (1 - discount / 100)
     
     def save(self, *args, **kwargs):
         if not self.price_paid:

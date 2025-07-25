@@ -268,3 +268,117 @@ body.detail-page {
         padding-right: 1rem;
     }
 }
+
+body.session-detail-page {
+    background: black url('/static/booking/session-detail.jpg') no-repeat left bottom;
+    background-size: 25%;
+    height: 100vh;
+    color: white;
+    font-family: sans-serif;
+    overflow: hidden;
+}
+
+.main-content {
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 2rem;
+    margin: 2rem auto;
+    max-width: 1000px;
+    border-radius: 1rem;
+    backdrop-filter: blur(8px);
+    display: block; 
+    color: white;
+}
+
+.main-header {
+    margin-bottom: 1.5rem;
+}
+
+.main-header h1 {
+    font-size: 2rem;
+    margin: 0;
+}
+
+.main-header p {
+    font-size: 1rem;
+    margin: 0.25rem 0 0 0;
+    opacity: 0.8;
+}
+/* .main-content {
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 2rem;
+    margin: 2rem auto;
+    max-width: 1000px;
+    display: flex;
+    border-radius: 1rem;
+    backdrop-filter: blur(8px);
+} */
+
+.layout-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 1.5rem;
+}
+
+.hall-container {
+    flex: 0 0 70%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+#form-panel {
+    flex: 0 0 30%;
+    padding: 0.5rem 0rem;
+    border-radius: 0.5rem 0;
+}
+
+.seat-row {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.seat {
+    width: 28px;
+    height: 20px;
+    border-radius: 50% / 40%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Імітація проходу після 5-го сидіння */
+.seat-row .seat:nth-child(6) {
+    margin-left: 2rem;
+}
+
+/* Відступ між 9-м і 10-м рядом */
+.seat-row:nth-child(9) {
+    margin-bottom: 1rem;
+}
+
+.seat:hover {
+    transform: scale(1.1);
+}
+
+.seat[style*="pointer-events: none"] {
+    cursor: not-allowed;
+}
+
+#form-panel button[type="submit"] {
+    background-color: transparent;
+    color: #800000;
+    border: 2px solid #800000;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#form-panel button[type="submit"]:hover {
+    background-color: #800000;
+    color: white;
+}
+

@@ -1,0 +1,100 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% comment %} <meta name="viewport" content="width=device-width, initial-scale=1.0"> {% endcomment %}
+    <title>Session</title>
+    <link rel="stylesheet" href="{% static 'booking/style.css' %}">
+    <meta name="csrf-token" content="{{ csrf_token }}">
+    <meta name="is-authenticated" content="{{ request.user.is_authenticated|yesno:'true,false' }}">
+
+</head>
+<body class="session-detail-page">
+    <div class="main-content">
+        <div class="main-header">
+            <h1>{{ session.performance.title }} - {{ session.date }}</h1>
+            <p>Hall: {{ session.hall.name }}</p>
+            <p>Time: {{ session.time }}</p>
+        </div>
+        <div class="layout-row">
+            <div class="hall-container space-y-2">
+                {% for row in seating %}
+                    <div class="seat-row flex space-x-2 justify-center">
+                        {% for item in row %}
+                            {% with seat=item.seat price=item.price %}
+                            <div
+                                class="seat rounded-full w-8 h-8 flex items-center justify-center text-xs font-bold cursor-pointer"
+                                style="background-color: {{ seat.category.color }}; 
+                                    {% if seat.id in booked_seats %}opacity: 0.4; pointer-events: none;{% endif %}"
+                                data-seat-id="{{ seat.id }}"
+                                data-price="{{ price }}"
+                            >
+                                {{ seat.label }}
+                            </div>
+                            {% endwith %}
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+            </div>
+            <div id="form-panel" class="mt-4 border border-gray-300 p-4 rounded w-64"></div>
+        </div>
+
+        {% comment %} <div class="hall-container">
+            {% for row in seating %}
+                <div class="row">
+                {% for seat in row %}
+                    <div class="seat {{ seat.category }}">
+                    data-seat-id="{{ seat.id }}"
+                    data-price="{{ seat.price }}">
+                    {{ seat.label }}
+                    </div>
+                {% endfor %}
+                </div>
+            {% endfor %}
+        </div> {% endcomment %}
+
+
+
+    </div>
+    <script>
+        function getCSRFToken() {
+            return document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const seats = document.querySelectorAll('.seat');
+            const formPanel = document.getElementById('form-panel');
+            const isAuthenticated = document.querySelector('meta[name="is-authenticated"]').getAttribute('content') === 'true';
+
+            seats.forEach(seat => {
+                seat.addEventListener('click', () => {
+                    if (!isAuthenticated) {
+                        formPanel.innerHTML = `
+                            <p class="text-red-500 font-semibold">Увійдіть, щоб забронювати місце.</p>
+                        `;
+                        return;
+                    }
+
+                    const seatId = seat.dataset.seatId;
+                    const price = seat.dataset.price;
+
+                    formPanel.innerHTML = `
+                        <h3 class="text-lg font-semibold mb-2">Ви обрали місце</h3>
+                        <p class="mb-2">Ціна: ${price} грн</p>
+                        <form method="post">
+                            <input type="hidden" name="csrfmiddlewaretoken" value="${getCSRFToken()}">
+                            <input type="hidden" name="seat_id" value="${seatId}">
+                            <button type="submit" class="border border-burgundy text-burgundy px-4 py-2 rounded hover:bg-burgundy hover:text-white transition">
+                                Забронювати
+                            </button>
+                        </form>
+                    `;
+                });
+            });
+        });
+
+    </script>
+
+</body>
+</html>

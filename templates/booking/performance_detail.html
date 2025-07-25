@@ -23,7 +23,7 @@
     <section class="details-block">
         <div class="sessions">
             {% for session in sessions %}
-                <button class="session-button">
+                <button class="session-button" onclick="location.href='{% url 'session_detail' session.id %}'">
                     {{ session.date }} — {{ session.time }}
                 </button>
             {% empty %}
