@@ -5,11 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ performance.title }}</title>
-    <link rel="stylesheet" href="{% static 'booking/style.css' %}">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
     
 </head>
-<body class="detail-page">
-    <div class="header-placeholder"></div>
+<body class="detail-page navbar-right-white">
+    
+    {% include "partials/navbar.html" %}
 
     <section class="hero" style="background-image: url('{{ performance.poster.url }}');">
         <div class="hero-overlay">
