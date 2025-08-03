@@ -103,7 +103,7 @@ body.detail-page {
   background-position: center;
   min-height: 500px;
   overflow: hidden;
-  margin-top: -50px;
+  margin-top: -60px;
 }
 
 
@@ -406,8 +406,229 @@ body:not(.performance-list-page) .navbar-buttons li a:hover {
 
 .navbar-buttons li a {
   text-decoration: none;
-  padding: 6px 14px;
+  padding: 6px 14px 6px 14px;
   border-radius: 6px;
   font-weight: 500;
   background: transparent;
 }
+
+.navbar-buttons li {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-buttons li form {
+    display: inline;
+}
+
+body:not(.performance-list-page) .logout-button {
+    background: transparent;
+    color: white;
+    border: 2px solid transparent;
+    padding: 6px 14px 6px 14px;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: inherit;
+    font-size: inherit;
+}
+
+body:not(.performance-list-page) .logout-button:hover {
+    color: #eaeaea;
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.logout-button {
+    background: transparent;
+    color: #7e1c1c;
+    border: 2px solid transparent;
+    padding: 6px 14px 6px 14px;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: inherit;
+    font-size: inherit;
+}
+
+.logout-button:hover {
+    color: #4d1010;
+    border-color: rgba(77, 16, 16, 0.4);
+}
+
+.logout-button:focus {
+    outline: none;
+}
+
+.navbar-buttons .username {
+    color: #4d1010;
+    font-weight: 600;
+    padding: 6px 12px;
+}
+
+body:not(.performance-list-page) .navbar-buttons .username {
+    color: white;
+    font-weight: 600;
+    padding: 6px 14px;
+}
+
+.auth-page {
+    background-color: #f8f5f5;
+    font-family: 'Segoe UI', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.form-container {
+    background: rgba(255, 255, 255, 0.92);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+    width: 400px;
+}
+
+.form-container h2 {
+    margin-bottom: 20px;
+    color: #7e1c1c;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 500;
+    color: #333;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus {
+    border-color: #7e1c1c;
+    outline: none;
+}
+
+.form-error {
+    margin-top: 6px;
+    color: #c0392b;
+    font-size: 0.87rem;
+    font-style: italic;
+}
+
+.form-container button[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    background-color: transparent;
+    border: 2px solid #7e1c1c;
+    color: #7e1c1c;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 20px;
+}
+
+.form-container button[type="submit"]:hover {
+    background-color: #7e1c1c;
+    color: white;
+}
+
+.messages {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 15px;
+    color: #c0392b;
+    text-align: center;
+    font-weight: 500;
+}
+
+
+/* .auth-page {
+    background-color: #f8f5f5;
+    font-family: 'Segoe UI', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.form-container {
+    background: rgba(255, 255, 255, 0.92);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+    width: 400px;
+}
+
+.form-container h2 {
+    margin-bottom: 20px;
+    color: #7e1c1c;
+    text-align: center;
+}
+
+.form-fields p {
+    margin-bottom: 16px;
+    font-size: 0.9rem;
+    color:#4d1010;
+}
+
+.form-fields label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 500;
+    color: #333;
+}
+
+
+
+.form-fields input {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    transition: border-color 0.3s;
+}
+
+.form-fields input:focus {
+    border-color: #7e1c1c;
+    outline: none;
+}
+
+.register-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: transparent;
+    border: 2px solid #7e1c1c;
+    color: #7e1c1c;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 20px;
+}
+
+.register-btn:hover {
+    background-color: #7e1c1c;
+    color: white;
+}
+
+.messages {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 15px;
+    color: #c0392b;
+    text-align: center;
+} */

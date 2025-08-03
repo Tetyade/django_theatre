@@ -1,7 +1,17 @@
 <nav class="navbar">
     <ul class="navbar-buttons">
         <li><a href="{% url 'performance_list' %}">Вистави</a></li>
+        {% if user.is_authenticated %}
+            <li><span class="username">{{ user.username }}</span></li>
+            <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="logout-button">Вийти</button>
+            </form>
+        {% else %}
+            <li><a href="{% url 'login' %}">Увійти</a></li>
+            <li><a href="{% url 'register' %}">Зареєструватися</a></li>
+        {% endif %}
         {% comment %} <li><a href="{% url 'about' %}">Про театр</a></li> {% endcomment %}
-        <li><a href="#">Профіль</a></li>
+        {% comment %} <li><a href="#">Профіль</a></li> {% endcomment %}
     </ul>
 </nav>
