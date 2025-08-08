@@ -13,6 +13,12 @@
   <div class="curtain left"></div>
   <div class="curtain right"></div>
 
+  <form method="get" class="filter-form">
+      <input type="text" name="title" placeholder="Назва вистави" value="{{ request.GET.title }}">
+      <input type="date" name="date" value="{{ request.GET.date }}">
+      <button type="submit">Пошук</button>
+  </form>
+
   <div class="content-wrapper">
     {% for perf in page_obj %}
       <div class="performance-card">

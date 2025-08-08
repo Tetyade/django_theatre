@@ -58,7 +58,7 @@ class Session(models.Model):
     
     def get_price_for_seat(self, seat):
         discount = seat.category.discount_percent if seat.category else Decimal('0')
-        return self.base_price * (Decimal('1') - discount / Decimal('100'))
+        return round(self.base_price * (Decimal('1') - discount / Decimal('100')), 2)
 
 class Booking(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

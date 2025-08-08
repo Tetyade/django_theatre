@@ -3,14 +3,30 @@ from django.contrib import messages
 from django.core.paginator import Paginator
 from booking.models import Performance, Session, Hall, SeatCategory, Booking, Seat
 
+from datetime import datetime
 
 def performance_list(request):
     performances = Performance.objects.all()
-    paginator = Paginator(performances, 10)
+    title_query = request.GET.get('title', '')
+    date_query = request.GET.get('date', '')
+    if title_query:
+        performances = performances.filter(title__icontains=title_query)
+    if date_query:
+        try:
+            date = datetime.strptime(date_query, '%Y-%m-%d').date()    
+            performances = Performance.objects.filter(session__date=date).distinct()
+        except ValueError:
+            pass
+    paginator = Paginator(performances, 8)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    
-    return render(request, 'booking\performance_list.html', {'page_obj': page_obj})
+
+    context = {
+        'page_obj': page_obj,
+        'title_query': title_query,
+        'date_query': date_query
+    }
+    return render(request, 'booking/performance_list.html', context)
 
 def performance_detail(request, performance_id):
     performance = Performance.objects.get(id=performance_id)

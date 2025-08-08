@@ -15,8 +15,8 @@
     <div class="main-content">
         <div class="main-header">
             <h1>{{ session.performance.title }} - {{ session.date }}</h1>
-            <p>Hall: {{ session.hall.name }}</p>
-            <p>Time: {{ session.time }}</p>
+            <p>Зал: {{ session.hall.name }}</p>
+            <p>Час: {{ session.time }}</p>
         </div>
         <div class="layout-row">
             <div id="form-panel" class="mt-4 border border-gray-300 p-4 rounded w-64"></div>
@@ -30,6 +30,9 @@
                                 style="background-color: {{ seat.category.color }}; 
                                     {% if seat.id in booked_seats %}opacity: 0.1; pointer-events: none;{% endif %}"
                                 data-seat-id="{{ seat.id }}"
+                                data-row="{{ seat.row }}"
+                                data-number="{{ seat.number }}"
+                                data-category="{{ seat.category.name }}"
                                 data-price="{{ price }}"
                             >
                                 {{ seat.label }}
@@ -66,11 +69,13 @@
 
                     formPanel.innerHTML = `
                         <h3 class="text-lg font-semibold mb-2">Ви обрали місце</h3>
+                        <p class="mb-2">Ряд: ${seat.dataset.row}, Місце: ${seat.dataset.number}</p>
+                        <p class="mb-2">Категорія: ${seat.dataset.category}</p>
                         <p class="mb-2">Ціна: ${price} грн</p>
                         <form method="post">
                             <input type="hidden" name="csrfmiddlewaretoken" value="${getCSRFToken()}">
                             <input type="hidden" name="seat_id" value="${seatId}">
-                            <button type="submit" class="border border-burgundy text-burgundy px-4 py-2 rounded hover:bg-burgundy hover:text-white transition">
+                            <button type="submit" >
                                 Забронювати
                             </button>
                         </form>

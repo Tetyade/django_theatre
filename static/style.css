@@ -23,9 +23,77 @@ body {
   }
 }
 
+.filter-form {
+  max-width: 1000px;
+  margin: 100px auto;
+  border-radius: 16px;
+  margin-top: 4rem;
+  margin-bottom: 2rem;
+  padding: 0;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.filter-form input[type="text"],
+.filter-form input[type="date"],
+.filter-form button {
+  padding: 0.8rem 1rem;
+  font-size: 1rem;
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+  /* height: 48px; */
+  transition: all 0.3s ease;
+}
+
+.filter-form input[type="text"] {
+  flex: 2 1 300px;
+  min-width: 200px;
+}
+
+.filter-form input[type="date"] {
+  flex: 1 1 150px;
+  min-width: 120px;
+}
+
+.filter-form input:focus {
+  outline: none;
+  border-color: #7a1123;
+  box-shadow: 0 0 0 3px rgba(122, 17, 35, 0.2);
+}
+
+.filter-form input[type="text"]::placeholder,
+.filter-form input[type="date"]::placeholder  {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+
+.filter-form button {
+  background: transparent;
+  color: white;
+  border: 2px solid transparent;
+  padding: 6px 14px 6px 14px;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+.filter-form button:hover {
+  color: #eaeaea;
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
 .content-wrapper {
   max-width: 1000px;
   margin: 100px auto;
+  margin-top: 0px;
   padding: 2rem;
   background-color: rgba(255, 255, 255, 0.3); 
   border-radius: 16px;
@@ -38,6 +106,8 @@ body {
 }
 
 .performance-card {
+  width: 100%;
+  max-width: 220px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -343,15 +413,18 @@ body.session-detail-page {
 
 #form-panel button[type="submit"] {
     background-color: transparent;
-    color: #800000;
-    border: 2px solid #800000;
+    color: white;
+    border: 2px solid white;
     padding: 0.5rem 1rem;
     border-radius: 0.5rem;
+    font-family: inherit;
+    font-size: inherit;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 #form-panel button[type="submit"]:hover {
     background-color: #800000;
+    border: 2px solid #800000;
     color: white;
 }
 
