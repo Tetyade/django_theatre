@@ -507,13 +507,14 @@ body:not(.performance-list-page) .navbar-buttons .username {
     color: #333;
 }
 
-.form-group input {
+.form-container input {
     width: 100%;
     padding: 10px 12px;
     border-radius: 6px;
     border: 1px solid #ccc;
-    font-size: 1rem;
     transition: border-color 0.3s;
+    font-size: 1rem;
+    box-sizing: border-box;
 }
 
 .form-group input:focus {
@@ -538,7 +539,9 @@ body:not(.performance-list-page) .navbar-buttons .username {
     border-radius: 6px;
     cursor: pointer;
     transition: all 0.3s ease;
-    margin-top: 20px;
+    margin-top: 10px;
+    font-size: 1rem;
+    box-sizing: border-box;
 }
 
 .form-container button[type="submit"]:hover {
